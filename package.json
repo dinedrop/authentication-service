@@ -1,14 +1,11 @@
 {
-  "name": "create-nodejs-ts-app",
+  "name": "authentication-server",
   "version": "3.0.8",
-  "description": "Node express mongoose typescript boilerplate",
+  "description": "Auth2.0 Server with Node.js, Express, MongoDB, Mongoose, TypeScript, Jest, Docker, Swagger, Passport, ESLint, Prettier, Husky, Commitizen, Standard Version, and more",
   "main": "dist/index.js",
   "bin": "bin/createNodetsApp.cjs",
-  "repository": "https://github.com/saisilinus/node-express-mongoose-typescript-boilerplate.git",
-  "bugs": {
-    "url": "https://github.com/saisilinus/node-express-mongoose-typescript-boilerplate/issues"
-  },
-  "author": "linus wafula saisi <saisilinus.work@gmail.com>",
+  "repository": "https://github.com/dinedrop/authentication-service.git",
+  "author": "Rhythm Shandlya",
   "license": "MIT",
   "type": "module",
   "engines": {

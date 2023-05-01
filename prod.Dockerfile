@@ -8,13 +8,16 @@ WORKDIR /app
 COPY package.json yarn.lock /app/
 
 # Install dependencies
-RUN yarn install --frozen-lockfile
+RUN yarn install --frozen-lockfile --production
 
 # Copy the rest of the application code to the working directory
 COPY . /app/
 
-# Expose port 3000 for the application
-EXPOSE $PORT
+# Set the environment variable to production
+ENV NODE_ENV=production
 
-# Start the application in watch mode
-CMD ["yarn", "dev"]
+# Expose port 3000 for the application
+EXPOSE 3000
+
+# Start the application
+CMD ["yarn", "start"]
