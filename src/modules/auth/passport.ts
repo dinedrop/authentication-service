@@ -1,8 +1,8 @@
-import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
-import tokenTypes from '../token/token.types';
-import config from '../../config/config';
-import User from '../user/user.model';
-import { IPayload } from '../token/token.interfaces';
+import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
+import tokenTypes from "../token/token.types";
+import config from "../../config/config";
+import User from "../user/user.model";
+import { IPayload } from "../token/token.interfaces";
 
 const jwtStrategy = new JwtStrategy(
   {
@@ -12,7 +12,7 @@ const jwtStrategy = new JwtStrategy(
   async (payload: IPayload, done) => {
     try {
       if (payload.type !== tokenTypes.ACCESS) {
-        throw new Error('Invalid token type');
+        throw new Error("Invalid token type");
       }
       const user = await User.findById(payload.sub);
       if (!user) {
