@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
-import validator from 'validator';
-import bcrypt from 'bcryptjs';
-import toJSON from '../toJSON/toJSON';
-import paginate from '../paginate/paginate';
-import { roles } from '../../config/roles';
-import { IUserDoc, IUserModel } from './user.interfaces';
+import mongoose from "mongoose";
+import validator from "validator";
+import bcrypt from "bcryptjs";
+import toJSON from "../toJSON/toJSON";
+import paginate from "../paginate/paginate";
+import { roles } from "../../config/roles";
+import { IUserDoc, IUserModel } from "./user.interfaces";
 
 const userSchema = new mongoose.Schema<IUserDoc, IUserModel>(
   {
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema<IUserDoc, IUserModel>(
       lowercase: true,
       validate(value: string) {
         if (!validator.isEmail(value)) {
-          throw new Error('Invalid email');
+          throw new Error("Invalid email");
         }
       },
     },
@@ -32,7 +32,9 @@ const userSchema = new mongoose.Schema<IUserDoc, IUserModel>(
       minlength: 8,
       validate(value: string) {
         if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-          throw new Error('Password must contain at least one letter and one number');
+          throw new Error(
+            "Password must contain at least one letter and one number"
+          );
         }
       },
       private: true, // used by the toJSON plugin
@@ -40,7 +42,7 @@ const userSchema = new mongoose.Schema<IUserDoc, IUserModel>(
     role: {
       type: String,
       enum: roles,
-      default: 'user',
+      default: "user",
     },
     isEmailVerified: {
       type: Boolean,
@@ -62,29 +64,38 @@ userSchema.plugin(paginate);
  * @param {ObjectId} [excludeUserId] - The id of the user to be excluded
  * @returns {Promise<boolean>}
  */
-userSchema.static('isEmailTaken', async function (email: string, excludeUserId: mongoose.ObjectId): Promise<boolean> {
-  const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
-  return !!user;
-});
+userSchema.static(
+  "isEmailTaken",
+  async function (
+    email: string,
+    excludeUserId: mongoose.ObjectId
+  ): Promise<boolean> {
+    const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
+    return !!user;
+  }
+);
 
 /**
  * Check if password matches the user's password
  * @param {string} password
  * @returns {Promise<boolean>}
  */
-userSchema.method('isPasswordMatch', async function (password: string): Promise<boolean> {
-  const user = this;
-  return bcrypt.compare(password, user.password);
-});
+userSchema.method(
+  "isPasswordMatch",
+  async function (password: string): Promise<boolean> {
+    const user = this;
+    return bcrypt.compare(password, user.password);
+  }
+);
 
-userSchema.pre('save', async function (next) {
+userSchema.pre("save", async function (next) {
   const user = this;
-  if (user.isModified('password')) {
+  if (user.isModified("password")) {
     user.password = await bcrypt.hash(user.password, 8);
   }
   next();
 });
 
-const User = mongoose.model<IUserDoc, IUserModel>('User', userSchema);
+const User = mongoose.model<IUserDoc, IUserModel>("User", userSchema);
 
 export default User;
