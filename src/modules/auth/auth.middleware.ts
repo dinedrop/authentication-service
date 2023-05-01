@@ -26,7 +26,6 @@ const verifyCallback =
         return reject(new ApiError(httpStatus.FORBIDDEN, "Forbidden"));
       }
     }
-
     resolve();
   };
 
