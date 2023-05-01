@@ -8,9 +8,5 @@ LICENSE
 *.md
 *.log
 *.config.js
-*.env
-.dockerignore
-.docker-compose.yml
-.docker
 .vscode
 yarn-error.log

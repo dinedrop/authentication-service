@@ -13,7 +13,7 @@ RUN yarn install --frozen-lockfile
 # Copy the rest of the application code to the working directory
 COPY . /app/
 
-# Expose port 3000 for the application
+# Expose port 5000 for the application
 EXPOSE $PORT
 
 # Start the application in watch mode
