@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-import toJSON from '../toJSON/toJSON';
-import { ITokenDoc, ITokenModel } from './token.interfaces';
-import tokenTypes from './token.types';
+import { toJSON } from "@dinedrop/shared";
+import { ITokenDoc, ITokenModel } from "./token.interfaces";
+import tokenTypes from "./token.types";
 
 const tokenSchema = new mongoose.Schema<ITokenDoc, ITokenModel>(
   {
@@ -13,12 +13,16 @@ const tokenSchema = new mongoose.Schema<ITokenDoc, ITokenModel>(
     },
     user: {
       type: String,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
     type: {
       type: String,
-      enum: [tokenTypes.REFRESH, tokenTypes.RESET_PASSWORD, tokenTypes.VERIFY_EMAIL],
+      enum: [
+        tokenTypes.REFRESH,
+        tokenTypes.RESET_PASSWORD,
+        tokenTypes.VERIFY_EMAIL,
+      ],
       required: true,
     },
     expires: {
@@ -38,6 +42,6 @@ const tokenSchema = new mongoose.Schema<ITokenDoc, ITokenModel>(
 // add plugin that converts mongoose to json
 tokenSchema.plugin(toJSON);
 
-const Token = mongoose.model<ITokenDoc, ITokenModel>('Token', tokenSchema);
+const Token = mongoose.model<ITokenDoc, ITokenModel>("Token", tokenSchema);
 
 export default Token;

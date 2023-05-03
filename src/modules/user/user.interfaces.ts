@@ -1,7 +1,7 @@
-import mongoose, { Document, Model } from 'mongoose';
+import mongoose, { Document, Model } from "mongoose";
 
-import { QueryResult } from '../paginate/paginate';
-import { AccessAndRefreshTokens } from '../token/token.interfaces';
+import { QueryResult } from "@dinedrop/shared";
+import { AccessAndRefreshTokens } from "../token/token.interfaces";
 
 export interface IUser {
   name: string;
@@ -16,15 +16,21 @@ export interface IUserDoc extends IUser, Document {
 }
 
 export interface IUserModel extends Model<IUserDoc> {
-  isEmailTaken(email: string, excludeUserId?: mongoose.Types.ObjectId): Promise<boolean>;
-  paginate(filter: Record<string, any>, options: Record<string, any>): Promise<QueryResult>;
+  isEmailTaken(
+    email: string,
+    excludeUserId?: mongoose.Types.ObjectId
+  ): Promise<boolean>;
+  paginate(
+    filter: Record<string, any>,
+    options: Record<string, any>
+  ): Promise<QueryResult>;
 }
 
 export type UpdateUserBody = Partial<IUser>;
 
-export type NewRegisteredUser = Omit<IUser, 'role' | 'isEmailVerified'>;
+export type NewRegisteredUser = Omit<IUser, "role" | "isEmailVerified">;
 
-export type NewCreatedUser = Omit<IUser, 'isEmailVerified'>;
+export type NewCreatedUser = Omit<IUser, "isEmailVerified">;
 
 export interface IUserWithTokens {
   user: IUserDoc;

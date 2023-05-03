@@ -1,5 +1,5 @@
-import { JwtPayload } from 'jsonwebtoken';
-import { Document, Model } from 'mongoose';
+import { JwtPayload } from "jsonwebtoken";
+import { Document, Model } from "mongoose";
 
 export interface IToken {
   token: string;
@@ -9,7 +9,7 @@ export interface IToken {
   blacklisted: boolean;
 }
 
-export type NewToken = Omit<IToken, 'blacklisted'>;
+export type NewToken = Omit<IToken, "blacklisted">;
 
 export interface ITokenDoc extends IToken, Document {}
 

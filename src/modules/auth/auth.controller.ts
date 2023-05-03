@@ -1,11 +1,11 @@
-import { Request, Response } from 'express';
-import httpStatus from 'http-status';
+import { Request, Response } from "express";
+import httpStatus from "http-status";
 
-import { emailService } from '../email';
-import { tokenService } from '../token';
-import { userService } from '../user';
-import catchAsync from '../utils/catchAsync';
-import * as authService from './auth.service';
+import { emailService } from "../email";
+import { tokenService } from "../token";
+import { userService } from "../user";
+import { catchAsync } from "@dinedrop/shared";
+import * as authService from "./auth.service";
 
 export const register = catchAsync(async (req: Request, res: Response) => {
   const user = await userService.registerUser(req.body);

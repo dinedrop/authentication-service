@@ -9,9 +9,9 @@ import xss from "xss-clean";
 
 import config from "./config/config";
 import { jwtStrategy } from "./modules/auth";
-import { ApiError, errorConverter, errorHandler } from "./modules/errors";
+import { ApiError, errorConverter, errorHandler } from "@dinedrop/shared";
 import { morgan } from "@dinedrop/shared";
-import { authLimiter } from "./modules/utils";
+import { authLimiter } from "@dinedrop/shared";
 import routes from "./routes/v1";
 
 const app: Express = express();

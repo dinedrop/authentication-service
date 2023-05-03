@@ -1,12 +1,12 @@
-import { Request, Response } from 'express';
-import httpStatus from 'http-status';
-import mongoose from 'mongoose';
+import { Request, Response } from "express";
+import httpStatus from "http-status";
+import mongoose from "mongoose";
 
-import ApiError from '../errors/ApiError';
-import { IOptions } from '../paginate/paginate';
-import catchAsync from '../utils/catchAsync';
-import pick from '../utils/pick';
-import * as userService from './user.service';
+import { ApiError } from "@dinedrop/shared";
+import { IOptions } from "@dinedrop/shared";
+import { catchAsync } from "@dinedrop/shared";
+import { pick } from "@dinedrop/shared";
+import * as userService from "./user.service";
 
 export const createUser = catchAsync(async (req: Request, res: Response) => {
   const user = await userService.createUser(req.body);
