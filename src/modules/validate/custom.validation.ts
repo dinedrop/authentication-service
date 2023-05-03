@@ -1,4 +1,4 @@
-import { CustomHelpers } from "joi";
+import { CustomHelpers } from 'joi';
 
 export const objectId = (value: string, helpers: CustomHelpers) => {
   if (!value.match(/^[0-9a-fA-F]{24}$/)) {

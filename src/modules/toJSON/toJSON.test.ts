@@ -1,5 +1,6 @@
-import mongoose, { Model, Document } from 'mongoose';
-import { toJSON } from '.';
+import mongoose, { Document, Model } from 'mongoose';
+
+import { toJSON } from './';
 
 interface SampleSchema {
   public: string;
