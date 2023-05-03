@@ -1,8 +1,8 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
-import config from '../../config/config';
-import logger from '../logger/logger';
-import { Message } from './email.interfaces';
+import config from "../../config/config";
+import { logger } from "@dinedrop/shared";
+import { Message } from "./email.interfaces";
 
 export const transport = nodemailer.createTransport(config.email.smtp);
 /* istanbul ignore next */
