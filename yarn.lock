@@ -577,17 +577,19 @@
     "enabled" "2.0.x"
     "kuler" "^2.0.0"
 
-"@dinedrop/shared@^0.0.9":
-  "integrity" "sha512-gIxbNzjVXTkJAG1IlApSFXDgn2ZAHqFpdcIvdTSsDAUFsSKDt00V5YPeZALLO3pRRxYHlWbFWFk5NSD0743qCw=="
-  "resolved" "https://registry.npmjs.org/@dinedrop/shared/-/shared-0.0.9.tgz"
-  "version" "0.0.9"
+"@dinedrop/shared@^0.0.10":
+  "integrity" "sha512-6n/24l63TH/etzE4OrGsTs5JPo89GuLv7elJ0mtIkf9X4RsCOd1Rrk0KTQXcvoDHKTXUKj1qXZY2/N3rxPu83g=="
+  "resolved" "https://registry.npmjs.org/@dinedrop/shared/-/shared-0.0.10.tgz"
+  "version" "0.0.10"
   dependencies:
     "express" "^4.18.2"
     "express-rate-limit" "^6.7.0"
     "http-status" "^1.6.2"
     "joi" "^17.9.2"
+    "jsonwebtoken" "^9.0.0"
     "mongoose" "^7.1.0"
     "morgan" "^1.10.0"
+    "passport" "^0.6.0"
     "winston" "^3.8.2"
 
 "@eslint/eslintrc@^1.0.5":

@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 import { NewRegisteredUser } from "../user/user.interfaces";
-import { password } from "../validate/custom.validation";
+import { password } from "@dinedrop/shared";
 
 const registerBody: Record<keyof NewRegisteredUser, any> = {
   email: Joi.string().required().email(),
