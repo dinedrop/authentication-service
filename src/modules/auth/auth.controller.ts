@@ -6,9 +6,19 @@ import { tokenService } from "../token";
 import { userService } from "../user";
 import { catchAsync } from "@dinedrop/shared";
 import * as authService from "./auth.service";
+import { sendMessageToKafkaTopic } from "../kafka/producer";
 
 export const register = catchAsync(async (req: Request, res: Response) => {
   const user = await userService.registerUser(req.body);
+  const broadcastedUser = {
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
+  sendMessageToKafkaTopic("user-registered", broadcastedUser).then(() => {
+    console.log(`${user.name} registered message sent to Kafka`);
+  });
   const tokens = await tokenService.generateAuthTokens(user);
   res.status(httpStatus.CREATED).send({ user, tokens });
 });

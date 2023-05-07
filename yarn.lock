@@ -577,10 +577,10 @@
     "enabled" "2.0.x"
     "kuler" "^2.0.0"
 
-"@dinedrop/shared@^0.0.20":
-  "integrity" "sha512-rkFYlhivZiTbL4qO54bftRT2sqZV7es5fXHiz145G19oY7eIXi8zZD021lsuBPyiw37VJGDTP2qo/T/QQ7/dCw=="
-  "resolved" "https://registry.npmjs.org/@dinedrop/shared/-/shared-0.0.20.tgz"
-  "version" "0.0.20"
+"@dinedrop/shared@^0.0.21":
+  "integrity" "sha512-h+35/gHVwZSreBGc5sKrA3sGf/D/IE1Qpo7ierOjBh85fxizzyRALeRgUrz7kJkcbH0tUszbWIdD1N0YX6ZkDQ=="
+  "resolved" "https://registry.npmjs.org/@dinedrop/shared/-/shared-0.0.21.tgz"
+  "version" "0.0.21"
   dependencies:
     "express" "^4.18.2"
     "express-rate-limit" "^6.7.0"

@@ -7,19 +7,9 @@ import { IOptions } from "@dinedrop/shared";
 import { catchAsync } from "@dinedrop/shared";
 import { pick } from "@dinedrop/shared";
 import * as userService from "./user.service";
-import producer from "../kafka/producer";
 
 export const createUser = catchAsync(async (req: Request, res: Response) => {
   const user = await userService.createUser(req.body);
-
-  await producer.connect();
-
-  const topic = "user-created";
-  const message = user;
-  await producer.produce(topic, message);
-
-  await producer.disconnect();
-
   res.status(httpStatus.CREATED).send(user);
 });
 
