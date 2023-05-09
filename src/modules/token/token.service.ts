@@ -20,13 +20,14 @@ import tokenTypes from "./token.types";
  * @returns {string}
  */
 export const generateToken = (
-  userId: mongoose.Types.ObjectId,
+  payloadData: { _id: mongoose.Types.ObjectId; role: string },
   expires: Moment,
   type: string,
   secret: string = config.jwt.secret
 ): string => {
   const payload = {
-    sub: userId,
+    sub: payloadData._id,
+    role: payloadData.role,
     iat: moment().unix(),
     exp: expires.unix(),
     type,
@@ -99,7 +100,7 @@ export const generateAuthTokens = async (
     "minutes"
   );
   const accessToken = generateToken(
-    user.id,
+    { _id: user.id, role: user.role },
     accessTokenExpires,
     tokenTypes.ACCESS
   );
@@ -109,7 +110,7 @@ export const generateAuthTokens = async (
     "days"
   );
   const refreshToken = generateToken(
-    user.id,
+    { _id: user.id, role: user.role },
     refreshTokenExpires,
     tokenTypes.REFRESH
   );
@@ -149,7 +150,7 @@ export const generateResetPasswordToken = async (
     "minutes"
   );
   const resetPasswordToken = generateToken(
-    user.id,
+    { _id: user.id, role: user.role },
     expires,
     tokenTypes.RESET_PASSWORD
   );
@@ -175,7 +176,7 @@ export const generateVerifyEmailToken = async (
     "minutes"
   );
   const verifyEmailToken = generateToken(
-    user.id,
+    { _id: user.id, role: user.role },
     expires,
     tokenTypes.VERIFY_EMAIL
   );

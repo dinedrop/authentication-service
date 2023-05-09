@@ -1,10 +1,11 @@
+import config from "../../config/config";
 import express from "express";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-
-import swaggerDefinition from "../../modules/swagger/swagger.definition";
+import { getSwagger } from "@dinedrop/shared";
 
 const router = express.Router();
+const swaggerDefinition = getSwagger(config.port);
 
 const specs = swaggerJsdoc({
   swaggerDefinition,

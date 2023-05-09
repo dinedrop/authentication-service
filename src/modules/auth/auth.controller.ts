@@ -4,11 +4,15 @@ import httpStatus from "http-status";
 import { emailService } from "../email";
 import { tokenService } from "../token";
 import { userService } from "../user";
-import { catchAsync } from "@dinedrop/shared";
+import { ApiError, catchAsync } from "@dinedrop/shared";
 import * as authService from "./auth.service";
 import { sendMessageToKafkaTopic } from "../kafka/producer";
+import config from "../../config/config";
 
 export const register = catchAsync(async (req: Request, res: Response) => {
+  if (req.body.role === "admin") {
+    new ApiError(httpStatus.BAD_REQUEST, "Admin registration is not allowed!");
+  }
   const user = await userService.registerUser(req.body);
   const broadcastedUser = {
     _id: user._id,
@@ -16,9 +20,11 @@ export const register = catchAsync(async (req: Request, res: Response) => {
     email: user.email,
     role: user.role,
   };
-  sendMessageToKafkaTopic("user-registered", broadcastedUser).then(() => {
-    console.log(`${user.name} registered message sent to Kafka`);
-  });
+  if (config.env != "isolated") {
+    sendMessageToKafkaTopic("user-registered", broadcastedUser).then(() => {
+      console.log(`${user.name} registered message sent to Kafka`);
+    });
+  }
   const tokens = await tokenService.generateAuthTokens(user);
   res.status(httpStatus.CREATED).send({ user, tokens });
 });
